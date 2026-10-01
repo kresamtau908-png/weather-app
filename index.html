@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 検索エンジンにインデックス・リンク追跡させない -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>天気情報アプリ</title>
+  <link rel="icon" type="image/svg+xml" href="./images/favicon.svg">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script type="module" src="./main.js" defer></script>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white/20 border border-white/40 backdrop-blur-md w-full max-w-md p-8 rounded-2xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center text-white drop-shadow-lg">OpenWeather API</h1>
+    <div class="flex gap-2 mb-4 mt-4">
+      <input id="id-input" type="text" placeholder="都市名を入力" spellcheck="false" class="flex-1 min-w-0 border border-gray-500 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:outline-none focus:ring-blue-400">
+      <button id="fetch-btn" class="bg-blue-500 backdrop-blur-md text-white text-sm px-4 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">検索</button>
+    </div>
+    <div id="weather-result" class="relative hidden bg-gradient-to-br from-sky-100 to-blue-300 rounded-xl p-6 shadow-xl backdrop-blur-md">
+      <p id="around-time" class="font-bold text-gray-800"></p>
+      <div id="page1">
+      <div class="space-y-2 mt-2 text-center">
+        <p id="city-id" class="text-2xl font-bold text-gray-800"></p>
+        <div class="flex items-center justify-center gap-3">
+        <img id="weather-icon" src="" alt="天気アイコン" class="w-12 h-12">
+        <p id="weather-desc" class="text-4xl font-bold text-gray-800"></p>
+        </div>
+        <p id="weather-temp" class="text-lg font-bold text-gray-800"></p>
+        <p id="weather-humidity" class="text-lg font-bold text-gray-800"></p>
+        <p id="weather-speed" class="text-lg font-bold text-gray-800"></p>
+          <div class="text-sm text-gray-600 mt-4 border-t pt-3 text-center">
+            <div class="inline-block text-left">
+          <p id="weather-lat"></p>
+          <p id="weather-lon"></p>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div id="page2" class="hidden">
+        <div class="mt-2 text-center">
+        <p id="max-temp" class="text-lg font-bold text-red-600"></p>
+        <p id="min-temp" class="text-lg font-bold text-blue-600 mb-2"></p>
+        <p id="feels-like" class="text-lg font-bold text-gray-800 mb-2"></p>
+        <p id="weather-pressure" class="text-lg font-bold text-gray-800"></p>
+        </div>
+        <div class="flex justify-center gap-4 text-lg font-bold text-gray-800 mt-4">
+          <p id="sun-rise"></p>
+          <p id="sun-set"></p>
+        </div>
+      </div>
+      <!-- ページ切り替えボタン（丸いガラス風ボタン＋シェブロンアイコン） -->
+      <button id="next-btn" aria-label="次のページ" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 p-2.5 rounded-full bg-white/50 border border-white/70 text-blue-700 shadow-md backdrop-blur-sm hover:bg-white/80 hover:scale-110 hover:shadow-lg active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition duration-200 cursor-pointer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button id="prev-btn" aria-label="前のページ" class="hidden absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 p-2.5 rounded-full bg-white/50 border border-white/70 text-blue-700 shadow-md backdrop-blur-sm hover:bg-white/80 hover:scale-110 hover:shadow-lg active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition duration-200 cursor-pointer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-full h-full"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+    </div>
+    <!-- エラーメッセージ -->
+    <p id="error-message" class="hidden text-sm text-red-700 whitespace-pre-line"></p>
+  </div>
+</body>
+
+</html>
